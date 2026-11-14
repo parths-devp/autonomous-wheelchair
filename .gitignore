@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.bak
+
+# Model weights and exported models (store separately or use Git LFS)
+*.pt
+*.pth
+*.onnx
+*.tflite
+*.engine
+*.mlmodel
+*.ncnn*
+runs/
+wandb/
+
+# Datasets and generated recordings
+datasets/
+data/raw/
+*.csv
+*.db
+*.sqlite3
+*.mp4
+*.avi
+
+# Calibration outputs that may be regenerated
+*.npz
+*.npy
