@@ -20,7 +20,7 @@ Store exported diagrams and editable source files for the wheelchair electrical 
 | Arduino STEP signal | D2 to TB6600 PUL+ |
 | Arduino DIR signal | D3 to TB6600 DIR+ |
 | TB6600 PUL- and DIR- | Arduino GND |
-| Arduino serial link | USB, typically \`/dev/ttyACM0\`, 115200 baud |
+| Arduino serial link | USB, typically `/dev/ttyACM0`, 115200 baud |
 
 The current test wiring leaves ENA disconnected. Verify the actual TB6600 terminal labels and the specific module's wiring requirements before powering it. All HC-SR04 ECHO lines require 3.3 V-safe level conversion.
 
