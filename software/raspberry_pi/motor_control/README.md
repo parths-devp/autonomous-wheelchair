@@ -21,7 +21,7 @@ The current setup uses USB serial, typically `/dev/ttyACM0`, at 115200 baud.
 Install pyserial:
 
 ```bash
-python3 -m pip install pyserial
+sudo apt install python3-serial
 ```
 
 Run the manual test with the drive wheels raised:
