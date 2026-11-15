@@ -12,7 +12,7 @@ Record each test date, hardware revision, setup, measured result, and pass/fail 
 
 ## Camera
 
-- Confirm the OV5647 is detected by \`rpicam-hello --list-cameras\`.
+- Confirm the OV5647 is detected by `rpicam-hello --list-cameras`.
 - Check the capture resolution and camera orientation.
 - Verify the checkerboard calibration at the resolution used by the calibration script.
 
