@@ -2,11 +2,13 @@ const byte STEP_PIN = 2;
 const byte DIR_PIN = 3;
 const unsigned long STEP_INTERVAL_US = 800;
 const unsigned long STEP_PULSE_US = 5;
+const unsigned long COMMAND_TIMEOUT_US = 750000;
 
 bool motorRunning = false;
 bool stepIsHigh = false;
 unsigned long lastStepRise = 0;
 unsigned long stepRiseTime = 0;
+unsigned long lastCommandTime = 0;
 
 void stopMotor() {
   motorRunning = false;
@@ -18,6 +20,7 @@ void setMotorDirection(bool forward) {
   stopMotor();
   digitalWrite(DIR_PIN, forward ? HIGH : LOW);
   lastStepRise = micros();
+  lastCommandTime = lastStepRise;
   motorRunning = true;
 }
 
@@ -39,14 +42,20 @@ void loop() {
       setMotorDirection(false);
     } else if (command == 'S' || command == 's') {
       stopMotor();
+    } else if (command == 'H' || command == 'h') {
+      lastCommandTime = micros();
     }
+  }
+
+  unsigned long now = micros();
+
+  if (motorRunning && now - lastCommandTime > COMMAND_TIMEOUT_US) {
+    stopMotor();
   }
 
   if (!motorRunning) {
     return;
   }
-
-  unsigned long now = micros();
 
   if (stepIsHigh && now - stepRiseTime >= STEP_PULSE_US) {
     digitalWrite(STEP_PIN, LOW);
