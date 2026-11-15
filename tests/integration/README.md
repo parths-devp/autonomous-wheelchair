@@ -7,7 +7,7 @@ Integrate one subsystem at a time. Keep the wheelchair mechanically supported an
 1. Run YOLO person detection independently and confirm stable camera frames.
 2. Train the person-distance model and verify that inference loads the generated model.
 3. Run the ultrasonic process and confirm that all three JSON fields and the timestamp update.
-4. Test Arduino F, B, and S commands using \`motor_test.py\`.
+4. Test Arduino F, B, and S commands using `motor_test.py`.
 5. Run the obstacle controller with the motor disabled or wheels raised.
 6. Simulate safe, near-obstacle, invalid, missing, and stale front-sensor data.
 7. Verify stop at or below 15 cm, resume at or above 25 cm, and state retention between thresholds.
