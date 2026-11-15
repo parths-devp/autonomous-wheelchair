@@ -69,6 +69,10 @@ def main():
             else:
                 print(f"Maintaining current state at {distance:.1f} cm.")
 
+            if current_command in {"F", "B"}:
+                connection.write(b"H")
+                connection.flush()
+
             time.sleep(LOOP_INTERVAL_SECONDS)
 
 
