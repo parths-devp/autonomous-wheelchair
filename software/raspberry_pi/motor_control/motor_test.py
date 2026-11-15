@@ -35,22 +35,19 @@ def main():
                 command = input("Command: ").strip().upper()
 
                 if command == "Q":
-                    command = "S"
+                    with command_lock:
+                        connection.write(b"S")
+                        connection.flush()
+                        current_command[0] = "S"
+                    break
 
                 if command in {"F", "B", "S"}:
                     with command_lock:
                         connection.write(command.encode("ascii"))
                         connection.flush()
                         current_command[0] = command
-
                     print("Sent:", command)
-
-                if command == "S" and current_command[0] == "S":
-                    if input("Quit? (y/N): ").strip().lower() == "y":
-                        break
-                elif command == "Q":
-                    break
-                elif command not in {"F", "B", "S"}:
+                else:
                     print("Enter F, B, S, or Q.")
 
         finally:
