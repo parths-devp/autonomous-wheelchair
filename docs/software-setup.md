@@ -58,7 +58,7 @@ Keep this separate from the YOLO virtual environment. The script writes `/dev/sh
 Install pyserial in the Python environment used for motor control:
 
 ```bash
-python3 -m pip install pyserial
+sudo apt install python3-serial
 ```
 
 Upload `software/arduino/motor_controller/motor_controller.ino` to an Arduino Uno. The Pi scripts use USB serial, normally `/dev/ttyACM0`, at 115200 baud:
