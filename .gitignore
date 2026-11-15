@@ -49,3 +49,5 @@ data/raw/
 # Calibration outputs that may be regenerated
 *.npz
 *.npy
+
+person_distance_model.pkl
