@@ -8,7 +8,7 @@ Use repeatable test data and record software versions with each result.
 - Confirm the expected columns are present.
 - Check the reported dataset shape and distance distribution.
 - Record MAE, RMSE, and R² for each feature set.
-- Confirm \`person_distance_model.pkl\` is created and can be loaded.
+- Confirm `person_distance_model.pkl` is created and can be loaded.
 
 ## Object detection
 
@@ -18,7 +18,7 @@ Use repeatable test data and record software versions with each result.
 
 ## Ultrasonic JSON interface
 
-- Confirm the file contains \`front_cm\`, \`right_cm\`, \`left_cm\`, and \`timestamp\`.
+- Confirm the file contains `front_cm`, `right_cm`, `left_cm`, and `timestamp`.
 - Confirm distances are in centimetres.
 - Confirm invalid measurements are represented by -1.0.
 - Confirm the file is replaced without partial JSON reads.
