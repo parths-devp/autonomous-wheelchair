@@ -9,15 +9,16 @@ This directory contains the Pi-side serial utilities for the Arduino Uno and TB6
 
 ## Serial connection
 
-The current setup uses a USB connection, typically `/dev/ttyACM0`, at 115200 baud. The Arduino sketch uses:
+The current setup uses USB serial, typically `/dev/ttyACM0`, at 115200 baud.
 
 | Command | Action |
 |---|---|
 | `F` | Forward |
 | `B` | Backward |
 | `S` | Stop |
+| `H` | Heartbeat to keep active motion enabled |
 
-Install pyserial in the Python environment used for motor control:
+Install pyserial:
 
 ```bash
 python3 -m pip install pyserial
@@ -38,8 +39,10 @@ The automatic controller reads `/dev/shm/ultrasonic_distances.json`, specificall
 - Between 15 cm and 25 cm: retain the previous command (hysteresis).
 - Missing, invalid, or stale front data: send STOP.
 
-The 5-second sensor timeout accommodates the sequential averaging cycle; confirm it against the actual sensor update rate. The automatic controller only uses the front sensor for its current stop/resume decision.
+The controller sends heartbeat bytes while moving. The Arduino firmware stops if it does not receive a heartbeat for 750 ms. The 5-second sensor timeout is a prototype setting that must be checked against the actual sensor update interval.
+
+The automatic controller currently uses only the front sensor. It does not yet steer using left/right measurements.
 
 ## Safety and status
 
-This is prototype integration code, not a certified collision-avoidance system. Verify command direction, stop latency, sensor freshness, motor power isolation, and physical emergency stop before enabling wheel motion. Start tests with wheels raised and use supervised low-speed tests only.
+This is prototype integration code, not a certified collision-avoidance system. Verify command direction, stop latency, sensor freshness, serial disconnect behaviour, motor power isolation, and physical emergency stop before enabling wheel motion. Start tests with wheels raised and use supervised low-speed tests only.
