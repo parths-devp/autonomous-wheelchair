@@ -1,15 +1,50 @@
 # Ultrasonic sensors
 
-The Raspberry Pi reads three HC-SR04 sensors using gpiozero and sequential measurements.
+The Raspberry Pi reads three HC-SR04 sensors sequentially using gpiozero and system Python.
 
-| Sensor | Trigger (BCM) | Echo (BCM) | JSON field |
+## GPIO mapping
+
+BCM numbering is used.
+
+| Sensor | Trigger | Echo | JSON field |
 |---|---:|---:|---|
-| Front | 17 | 27 | \`front_cm\` |
-| Right | 22 | 5 | \`right_cm\` |
-| Left | 23 | 24 | \`left_cm\` |
+| Front/centre | GPIO 17 | GPIO 27 | \`front_cm\` |
+| Right | GPIO 22 | GPIO 5 | \`right_cm\` |
+| Left | GPIO 23 | GPIO 24 | \`left_cm\` |
 
-The script averages up to 10 valid readings per sensor and writes the latest values with a timestamp to \`/dev/shm/ultrasonic_distances.json\`.
+## Operation
 
-A reading of \`-1.0\` means no valid echo was received during the measurement attempts. The JSON field names and timestamp format are retained for the Raspberry Pi obstacle-monitoring application.
+Script: \`ultrasonic.py\`
 
-Run this script with the system Python environment where gpiozero is installed. Do not connect an HC-SR04 5 V ECHO output directly to a Raspberry Pi GPIO pin. Use a suitable voltage divider or level shifter.
+The script takes up to 10 readings per sensor, averages valid echoes, and writes a JSON record to:
+
+\`\`\`text
+/dev/shm/ultrasonic_distances.json
+\`\`\`
+
+Example structure:
+
+\`\`\`json
+{
+  "front_cm": 73.0,
+  "right_cm": 21.1,
+  "left_cm": 31.4,
+  "timestamp": 1794686682.74
+}
+\`\`\`
+
+Distances are in centimetres and the timestamp is Unix time. A value of \`-1.0\` means that no valid echo was received during that sensor's measurement attempts. The file is replaced atomically so that a reader does not normally see a partially written JSON record.
+
+Run with the Raspberry Pi system Python where gpiozero is installed:
+
+\`\`\`bash
+python3 software/raspberry_pi/ultrasonic_sensors/ultrasonic.py
+\`\`\`
+
+Keep this process in the system Python environment. The YOLO/Picamera2 application runs in a separate virtual environment.
+
+## Electrical warning
+
+HC-SR04 ECHO can output 5 V. Raspberry Pi GPIO inputs are 3.3 V only. Use a correctly sized voltage divider or level shifter on every ECHO line. Do not connect a 5 V ECHO signal directly to a Raspberry Pi.
+
+The sensor readings are proximity measurements in three directions. They are not automatically associated with individual YOLO bounding boxes.
