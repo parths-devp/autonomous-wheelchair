@@ -2,18 +2,18 @@
 
 ## Person distance training data
 
-File: \`person_distance_training.csv\`
+File: `person_distance_training.csv`
 
 The committed dataset contains 120 samples: 30 samples at each measured distance of 1.0 m, 1.5 m, 2.0 m, and 2.5 m.
 
 | Column | Meaning |
 |---|---|
-| \`Distance (m)\` | Reference distance to the person, in metres |
-| \`Sample\` | Sample number within the distance group |
-| \`Height (px)\` | Detected person bounding-box height |
-| \`Area (px^2)\` | Detected person bounding-box area |
+| `Distance (m)` | Reference distance to the person, in metres |
+| `Sample` | Sample number within the distance group |
+| `Height (px)` | Detected person bounding-box height |
+| `Area (px^2)` | Detected person bounding-box area |
 
-The training script maps these columns to the feature names \`distance\`, \`height\`, and \`area\`. It compares linear regression using height, area, and both features, then saves the best model by held-out mean absolute error.
+The training script maps these columns to the feature names `distance`, `height`, and `area`. It compares linear regression using height, area, and both features, then saves the best model by held-out mean absolute error.
 
 ## Limitations
 
