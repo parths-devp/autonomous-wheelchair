@@ -14,6 +14,6 @@ For each sensor, record:
 - Target material, target angle, and environmental conditions.
 - Date, supply voltage, and any correction factor.
 
-The current HC-SR04 implementation averages up to 10 valid readings and writes the latest values to \`/dev/shm/ultrasonic_distances.json\`. No complete sensor calibration dataset or verified correction coefficients have been committed yet.
+The current HC-SR04 implementation averages up to 10 valid readings and writes the latest values to `/dev/shm/ultrasonic_distances.json`. No complete sensor calibration dataset or verified correction coefficients have been committed yet.
 
 Keep raw measurements as well as calculated results so that correction methods can be reviewed later.
