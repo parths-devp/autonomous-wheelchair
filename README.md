@@ -23,7 +23,7 @@ The repository contains working subsystem code for YOLO11n person detection, cam
 
 ## Data flow
 
-\`\`\`text
+```text
 OV5647 camera -> YOLO11n person detection -> bounding-box features
                                              |
                                              v
@@ -38,20 +38,20 @@ HC-SR04 left / front / right -> JSON sensor readings
                                              |
                                              v
 Arduino Uno -> TB6600 -> NEMA 23 drive motor
-\`\`\`
+```
 
 The camera distance model and ultrasonic sensors provide different measurements. A single ultrasonic reading is not automatically the depth of every object detected by the camera. Object association requires sensor direction, field of view, mounting geometry, and additional validation.
 
 ## Repository structure
 
-- \`calibration/\` — camera and ultrasonic calibration procedures.
-- \`docs/\` — project overview, architecture, setup, hardware, and wiring guidance.
-- \`hardware/\` — component list, CAD organization, electronics, and calibration records.
-- \`machine_learning/\` — person-distance dataset and model training.
-- \`media/\` — project photographs and demonstration videos.
-- \`software/arduino/\` — Arduino motor-controller firmware.
-- \`software/raspberry_pi/\` — object detection, distance estimation, ultrasonic sensing, and motor control.
-- \`tests/\` — subsystem and integration test procedures.
+- `calibration/` — camera and ultrasonic calibration procedures.
+- `docs/` — project overview, architecture, setup, hardware, and wiring guidance.
+- `hardware/` — component list, CAD organization, electronics, and calibration records.
+- `machine_learning/` — person-distance dataset and model training.
+- `media/` — project photographs and demonstration videos.
+- `software/arduino/` — Arduino motor-controller firmware.
+- `software/raspberry_pi/` — object detection, distance estimation, ultrasonic sensing, and motor control.
+- `tests/` — subsystem and integration test procedures.
 
 ## Quick start
 
@@ -59,29 +59,29 @@ The camera/YOLO application and the ultrasonic GPIO application use separate Pyt
 
 Train the distance model from the repository root:
 
-\`\`\`bash
+```bash
 python3 machine_learning/training/training.py
-\`\`\`
+```
 
-This creates \`person_distance_model.pkl\` in the repository root. The inference script also requires the YOLO11n NCNN model directory \`yolo11n_ncnn_model\`, which is not committed.
+This creates `person_distance_model.pkl` in the repository root. The inference script also requires the YOLO11n NCNN model directory `yolo11n_ncnn_model`, which is not committed.
 
 Run the three-sensor application using system Python on the Raspberry Pi:
 
-\`\`\`bash
+```bash
 python3 software/raspberry_pi/ultrasonic_sensors/ultrasonic.py
-\`\`\`
+```
 
-Upload \`software/arduino/motor_controller/motor_controller.ino\` to the Arduino Uno. For a raised-wheel serial test, run:
+Upload `software/arduino/motor_controller/motor_controller.ino` to the Arduino Uno. For a raised-wheel serial test, run:
 
-\`\`\`bash
+```bash
 python3 software/raspberry_pi/motor_control/motor_test.py
-\`\`\`
+```
 
 The automatic obstacle controller is:
 
-\`\`\`bash
+```bash
 python3 software/raspberry_pi/motor_control/obstacle_motor_controller.py
-\`\`\`
+```
 
 Do not run the automatic controller until the motor direction, emergency stop, sensor readings, serial connection, and stop behaviour have been checked with the drive wheels raised.
 
