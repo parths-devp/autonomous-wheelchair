@@ -1,11 +1,11 @@
 # Object detection
 
-The current Raspberry Pi object-detection script is \`object_detection_person.py\`.
+The current Raspberry Pi object-detection script is `object_detection_person.py`.
 
 ## Configuration
 
 - Model: YOLO11n exported to NCNN format
-- Model directory: \`yolo11n_ncnn_model\` (external model artifact; not committed)
+- Model directory: `yolo11n_ncnn_model` (external model artifact; not committed)
 - Camera: OV5647 through Picamera2
 - Camera frame size: 640 × 480
 - YOLO inference image size: 320
@@ -18,9 +18,9 @@ The script captures frames in a background thread, performs YOLO inference, draw
 
 Activate the Raspberry Pi camera/YOLO virtual environment and run:
 
-\`\`\`bash
+```bash
 python3 software/raspberry_pi/object_detection/object_detection_person.py
-\`\`\`
+```
 
 The environment must provide Picamera2, Ultralytics with NCNN support, and OpenCV. Picamera2 is supplied through the Raspberry Pi system packages in the current setup, so the virtual environment may need system site packages enabled.
 
